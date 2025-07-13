@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>XO</title>
+    <link rel="stylesheet" href="xo.css">
+</head>
+<body>
+    <div class="kol">
+        <div class="xo">
+            <div>
+                <div>
+                    <img src="">
+                </div>
+                <div>
+                    <img src="">
+                </div>
+                <div>
+                    <img src="">
+                </div>
+            </div>
+            <div>
+                <div>
+                    <img src="">
+                </div>
+                <div>
+                    <img src="">
+                </div>
+                <div>
+                    <img src="">
+                </div>
+            </div>
+            <div>
+                <div>
+                    <img src="">
+                </div>
+                <div>
+                    <img src="">
+                </div>
+                <div>
+                    <img src="">
+                </div>
+            </div>
+        </div>
+        <div class="result-div">
+            <div class="x-div">
+                <div class="x-img">
+                    <img src="../../images/xo/x.png">
+                </div>
+                <div class="x-score">0</div>
+            </div>
+            <div class="khat">-</div>
+            <div class="o-div">
+                <div class="o-score">0</div>
+                <div class="o-img">
+                    <img src="../../images/xo/o.png">
+                </div>
+            </div>  
+        </div>
+        <div class="restart" style="display: none;">
+            <div class="restart2">
+                <div class="restart3">
+                    <div class="restart-div1">
+                        <div class="restart-div2">
+                            <div class="restart-div3" dir="rtl"></div>
+                        </div>
+                    </div>
+                    <div class="restart-btn">
+                        <button onclick="restart()" style="display: none;">بازی دوباره</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="o-information">
+            <div class="o-bgimg"></div>
+        </div>
+        <div class="o-info">
+            <div class="o-titr">آمار بازی</div>
+            <div class="o-game-number">
+                <div class="o-game-text">تعداد بازی : </div>
+                <div class="o-game-num">0</div>
+            </div>
+            <div class="o-win-number">
+                <div class="o-win-text">تعداد برد : </div>
+                <div class="o-win-num">0</div>
+            </div>
+            <div class="o-draw-number">
+                <div class="o-draw-text">تعداد مساوی : </div>
+                <div class="o-draw-num">0</div>
+            </div>
+            <div class="o-lose-number">
+                <div class="o-lose-text">تعداد باخت : </div>
+                <div class="o-lose-num">0</div>
+            </div>
+            <div class="o-win-per">
+                <div class="o-win-percent-text">درصد برد : </div>
+                <div class="o-win-percent">0</div>
+            </div>
+            <div class="o-draw-per">
+                <div class="o-draw-percent-text">درصد مساوی : </div>
+                <div class="o-draw-percent">0</div>
+            </div>
+            <div class="o-lose-per">
+                <div class="o-lose-percent-text">درصد باخت : </div>
+                <div class="o-lose-percent">0</div>
+            </div>
+            <div class="o-chart-div">
+                <div class="o-chart" style="background-color: transparent;">
+                    <div class="o-win-chart" style="width: 0%;"></div>
+                    <div class="o-draw-chart" style="width: 0%;"></div>
+                    <div class="o-lose-chart" style="width: 0%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="x-information">
+            <div class="x-bgimg"></div>
+        </div>
+        <div class="x-info">
+            <div class="x-titr">آمار بازی</div>
+            <div class="x-game-number">
+                <div class="x-game-text">تعداد بازی : </div>
+                <div class="x-game-num">0</div>
+            </div>
+            <div class="x-win-number">
+                <div class="x-win-text">تعداد برد : </div>
+                <div class="x-win-num">0</div>
+            </div>
+            <div class="x-draw-number">
+                <div class="x-draw-text">تعداد مساوی : </div>
+                <div class="x-draw-num">0</div>
+            </div>
+            <div class="x-lose-number">
+                <div class="x-lose-text">تعداد باخت : </div>
+                <div class="x-lose-num">0</div>
+            </div>
+            <div class="x-win-per">
+                <div class="x-win-percent-text">درصد برد : </div>
+                <div class="x-win-percent">0</div>
+            </div>
+            <div class="x-draw-per">
+                <div class="x-draw-percent-text">درصد مساوی : </div>
+                <div class="x-draw-percent">0</div>
+            </div>
+            <div class="x-lose-per">
+                <div class="x-lose-percent-text">درصد باخت : </div>
+                <div class="x-lose-percent">0</div>
+            </div>
+            <div class="x-chart-div">
+                <div class="x-chart" style="background-color: transparent;">
+                    <div class="x-win-chart" style="width: 0%;"></div>
+                    <div class="x-draw-chart" style="width: 0%;"></div>
+                    <div class="x-lose-chart" style="width: 0%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="xo.js"></script>
+</body>
+</html>

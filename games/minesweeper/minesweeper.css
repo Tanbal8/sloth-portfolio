@@ -1,0 +1,471 @@
+@font-face {
+    font-family: agency;
+    src: url(../../fonts/english/AgencyFB-Bold.ttf);
+}
+@font-face {
+    font-family: consola;
+    src: url(../../fonts/english/CONSOLA.TTF);
+}
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+    user-select: none;
+}
+.kol {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.game {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    overflow: hidden;
+}
+.bomb {
+    width: 500px;
+    aspect-ratio: 1;
+    background-color: #aaa;
+    padding: 5px;
+    display: grid;
+    box-sizing: border-box;
+}
+.bomb > div {
+    background-color: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-family: arial;
+    margin: 3px;
+}
+.timer {
+    height: 50px;
+    background-color: #666;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.timer-div {
+    width: 120px;
+    height: 80%;
+    background-color: #bbb;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 21px;
+    font-family: arial;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+.timer-div > div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.aaa {
+    height: 50px;
+    background-color: #555;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+.aaa > div {
+    width: 100px;
+    height: 80%;
+    background-color: #bbb;
+    border-radius: 10px;
+}
+.size {
+    cursor: pointer;
+    position: relative;
+}
+.size-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    font-family: arial;
+    box-sizing: border-box;
+}
+.size-content {
+    width: 100%;
+    height: fit-content;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 18px;
+    font-family: arial;
+    background-color: #999;
+    box-shadow: 2px 2px 3px gray;
+    display: none;
+}
+.size-content > div {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+}
+.size-content > div:hover {
+    background-color: #888;
+}
+.size-content > div:first-child, .bomb-content > div:first-child {
+    border-radius: 10px 10px 0 0;
+}
+.size-content > div:last-child, .bomb-content > div:last-child {
+    border-radius: 0 0 10px 10px;
+}
+.size-content > div:not(:last-child), .bomb-content > div:not(:last-child) {
+    border-bottom: 1px solid #777;
+}
+.flag-num, .bomb-num {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.f-img, .b-img {
+    width: 40%;
+    height: 100%;
+    background-position: center;
+    background-size: 32px 32px;
+    background-repeat: no-repeat;
+}
+.f-img {
+    background-image: url(../../images/minesweeper/flag.png);
+}
+.b-img {
+    background-image: url(../../images/minesweeper/bomb.png);
+}
+.f-num, .b-num {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
+    font-family: arial;
+}
+.bomb-num {
+    position: relative;
+    cursor: pointer;
+}
+.bomb-content {
+    width: 100%;
+    height: fit-content;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    flex-direction: column;
+    border-radius: 10px;
+    font: 18px arial;
+    box-shadow: 2px 2px 3px gray;
+    display: none;
+}
+.bomb-content > div {
+    width: 100%;
+    height: 40px;
+    background-color: #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+}
+.bomb-content > div:hover {
+    background-color: #888;
+}
+.bomb-img, .flag-img {
+    background-position: center;
+    background-size: 85% 85%;
+    background-repeat: no-repeat;
+}
+.bomb-img {
+    background-image: url(../../images/minesweeper/bomb.png);
+}
+.flag-img {
+    background-image: url(../../images/minesweeper/flag.png);
+}
+.restart {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.restart-div {
+    width: 400px;
+    height: 250px;
+    background-color: #bbb;
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow: 2px 2px 3px gray;
+}
+.restart-div > div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.restart-text {
+    font-size: 50px;
+    font-family: agency;
+    letter-spacing: 2px;
+}
+.restart-timer {
+    display: flex;
+    flex-direction: row;
+    font-size: 35px;
+    font-family: consola;
+    letter-spacing: 3px;
+}
+.restart-timer > div {
+    height: 100%;
+    margin: 0 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.restart-btn > button {
+    width: 85px;
+    aspect-ratio: 2;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: arial;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+@media only screen and (max-width: 1025px) {
+    .game {
+        border-radius: 17px;
+    }
+    .bomb {
+        width: 450px;
+        padding: 4px;
+    }
+    .bomb > div {
+        border-radius: 4px;
+        font-size: 18px;
+        margin: 4px;
+    }
+    .timer {
+        height: 45px;
+        border-radius: 18px 18px 0 0;
+    }
+    .timer-div {
+        width: 100px;
+        border-radius: 8px;
+        font-size: 18px;
+        padding: 0 8px;
+    }
+    .aaa {
+        height: 45px;
+        padding: 0 10px;
+    }
+    .aaa > div {
+        width: 100px;
+        border-radius: 8px;
+    }
+    .size-div, .f-num, .b-num {
+        font-size: 18px;
+    }
+    .size-content, .bomb-content {
+        border-radius: 8px;
+        font-size: 17px;
+        box-shadow: 2px 2px 2px gray;
+    }
+    .size-content > div, .bomb-content > div {
+        height: 36px;
+    }
+    .size-content > div:first-child, .bomb-content > div:first-child {
+        border-radius: 8px 8px 0 0;
+    }
+    .size-content > div:last-child, .bomb-content > div:last-child {
+        border-radius: 0 0 8px 8px;
+    } 
+    .f-img, .b-img {
+        background-size: 27px 27px;
+    }
+    .restart-div {
+        width: 350px;
+        height: 200px;
+        border-radius: 18px;
+        box-shadow: 2px 2px 2px gray;
+    }
+    .restart-text {
+        font-size: 43px;
+    }
+    .restart-timer {
+        font-size: 28px;
+        letter-spacing: 2.5px;
+    }
+    .restart-btn > button {
+        width: 70px;
+        border-radius: 8px;
+        font-size: 17px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .game {
+        border-radius: 14px;
+    }
+    .bomb {
+        width: 380px;
+        padding: 3px;
+    }
+    .bomb > div {
+        border-radius: 4px;
+        font-size: 16px;
+        margin: 2.5px;
+    }
+    .timer {
+        height: 42px;
+        border-radius: 15px 15px 0 0;
+    }
+    .timer-div {
+        width: 80px;
+        border-radius: 7px;
+        font-size: 16px;
+        padding: 0 6px;
+    }
+    .aaa {
+        height: 42px;
+        padding: 0 10px;
+    }
+    .aaa > div {
+        width: 80px;
+        border-radius: 7px;
+    }
+    .size-div, .f-num, .b-num {
+        font-size: 16px;
+    }
+    .size-content, .bomb-content {
+        border-radius: 7px;
+        font-size: 15px;
+        box-shadow: 2px 2px 2px gray;
+    }
+    .size-content > div, .bomb-content > div {
+        height: 32px;
+    }
+    .size-content > div:first-child, .bomb-content > div:first-child {
+        border-radius: 7px 7px 0 0;
+    }
+    .size-content > div:last-child, .bomb-content > div:last-child {
+        border-radius: 0 0 7px 7px;
+    }
+    .f-img, .b-img {
+        background-size: 24px 24px;
+    }
+    .restart-div {
+        width: 300px;
+        height: 170px;
+        border-radius: 16px;
+        box-shadow: 2px 2px 2px gray;
+    }
+    .restart-text {
+        font-size: 38px;
+    }
+    .restart-timer {
+        font-size: 25px;
+        letter-spacing: 2px;
+    }
+    .restart-btn > button {
+        width: 65px;
+        border-radius: 7px;
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width: 481px) {
+    .game {
+        border-radius: 10px;
+    }
+    .bomb {
+        width: 300px;
+        padding: 3px;
+    }
+    .bomb > div {
+        border-radius: 3px;
+        font-size: 13px;
+        margin: 1.5px;
+    }
+    .timer {
+        height: 37px;
+        border-radius: 12px 12px 0 0;
+    }
+    .timer-div {
+        width: 70px;
+        border-radius: 6px;
+        font-size: 15px;
+        padding: 0 5px;
+    }
+    .aaa {
+        height: 37px;
+        padding: 0 10px;
+    }
+    .aaa > div {
+        width: 70px;
+        border-radius: 6px;
+    }
+    .size-divl .f-num, .b-num {
+        font-size: 14px;
+    }
+    .size-content, .bomb-content {
+        border-radius: 6px;
+        font-size: 13px;
+        box-shadow: 2px 2px 1px gray;
+    }
+    .size-content > div, .bomb-content > div {
+        height: 28px;
+    }
+    .size-content > div:first-child, .bomb-content > div:first-child {
+        border-radius: 6px 6px 0 0;
+    }
+    .size-content > div:last-child, .bomb-content > div:last-child {
+        border-radius: 0 0 6px 6px;
+    }
+    .f-img, .b-img {
+        background-size: 21px 21px;
+    }
+    .restart-div {
+        width: 250px;
+        height: 130px;
+        border-radius: 16px;
+        box-shadow: 2px 2px 2px gray;
+    }
+    .restart-text {
+        font-size: 33px;
+    }
+    .restart-timer {
+        font-size: 22px;
+        letter-spacing: 2px;
+    }
+    .restart-btn > button {
+        width: 60px;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+}

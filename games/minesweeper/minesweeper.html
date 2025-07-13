@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Minesweeper</title>
+    <link rel="stylesheet" href="minesweeper.css">
+</head>
+<body>
+    <div class="restart" style="display: none;">
+        <div class="restart-div">
+            <div class="restart-text">Game over</div>
+            <div class="restart-timer">
+                <div class="restart-m"></div>
+                <div style="margin-top: -2px;"></div>
+                <div class="restart-s"></div>
+            </div>
+            <div class="restart-btn">
+                <button onclick="restartFunction()">restart</button>
+            </div>
+        </div>
+    </div>
+    <div class="kol">
+        <div class="start" style="display: none;">
+            <div class="start-img"></div>
+            <div class="start-btn">
+                <button onclick="start()">start</button>
+            </div>
+        </div>
+        <div class="game" style="display: flex;">
+            <div class="timer">
+                <div class="timer-div">
+                    <div class="m">00</div>
+                    <div style="margin-top: -2px;">:</div>
+                    <div class="s">00</div>
+                </div>
+            </div>
+            <div class="aaa">
+                <div class="size">
+                    <div class="size-div">10 × 10</div>
+                    <div class="size-content">
+                        <div onclick="size(8)">8 × 8</div>
+                        <div onclick="size(10)">10 × 10</div>
+                        <div onclick="size(15)">15 × 15</div>
+                    </div>
+                </div>
+                <div class="flag-num">
+                    <div class="f-img"></div>
+                    <div class="f-num">0</div>
+                </div>
+                <div class="bomb-num">
+                    <div class="b-img"></div>
+                    <div class="b-num">15</div>
+                    <div class="bomb-content">
+                        <div onclick="bomb15()">15</div>
+                        <div onclick="bomb20()">20</div>
+                        <div onclick="bomb30()">30</div>
+                        <div onclick="bomb50()">50</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bomb" style="grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%; grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;"></div>
+        </div>
+    </div>
+    <script src="minesweeper.js"></script>
+</body>
+</html>

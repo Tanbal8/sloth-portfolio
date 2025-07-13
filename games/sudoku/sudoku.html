@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>sudoku</title>
+    <link rel="stylesheet" href="sudoku.css">
+</head>
+<body>
+    <div class="kol">
+        <div class="start" style="display: none;"></div>
+        <div class="level" style="display: flex;">
+            <div class="level-text">سطح بازی</div>
+            <div class="level-btn">
+                <button onclick="easy()">آسون</button>
+                <button onclick="medium()">متوسط</button>
+                <button onclick="hard()">سخت</button>
+            </div>
+        </div>
+        <div class="gn">
+            <div class="game" style="display: none;">
+                <div>
+                    <div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="numbers" style="display: none;">
+                <div class="one">1</div>
+                <div class="two">2</div>
+                <div class="three">3</div>
+                <div class="four">4</div>
+                <div class="five">5</div>
+                <div class="six">6</div>
+                <div class="seven">7</div>
+                <div class="eight">8</div>
+                <div class="nine">9</div>
+            </div>
+        </div>
+        <div class="timer-div" style="display: none;">
+            <div class="m">00</div>
+            <div>:</div>
+            <div class="s">00</div>
+        </div>
+    </div>
+    <script src="sudoku.js"></script>
+</body>
+</html>
