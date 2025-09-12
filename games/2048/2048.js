@@ -69,28 +69,8 @@ var Game = {
         return (this.data[y][x].type == 'empty') ? {x, y} : this.Empty_Cell();
     }
 }
-window.onload = function() {
-    Game.Start();
-}
 function DIV(position) {
     return Game.div.children[(position.y * Game.size.column) + position.x];
-}
-function Key_Press(event) {
-    if (Game.delay_check) return;
-    switch (event.key) {
-        case 'ArrowUp' : case 'w' :
-            Move('up');
-            break;
-        case 'ArrowDown' : case 's' :
-            Move('down');
-            break;
-        case 'ArrowRight' : case 'd' :
-            Move('right');
-            break;
-        case 'ArrowLeft' : case 'a' :
-            Move('left');
-            break;
-    }
 }
 function Clear_Cell(position) {
     let data = Game.data[position.y][position.x];
@@ -292,4 +272,47 @@ function Background_Color(number) {
         case 16384 :
             return '#4b1dae';
     }
+}
+function Key_Press(event) {
+    if (Game.delay_check) return;
+    switch (event.key) {
+        case 'ArrowUp' : case 'w' :
+            Move('up');
+            break;
+        case 'ArrowDown' : case 's' :
+            Move('down');
+            break;
+        case 'ArrowRight' : case 'd' :
+            Move('right');
+            break;
+        case 'ArrowLeft' : case 'a' :
+            Move('left');
+            break;
+    }
+}
+let start_x, start_y;
+const swipe_to_move = 30;
+document.addEventListener("touchstart", e => {
+    const touch = e.touches[0];
+    start_x = touch.clientX;
+    start_y = touch.clientY;
+});
+document.addEventListener("touchend", e => {
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - start_x;
+    const dy = touch.clientY - start_y;
+    const abs_dx = Math.abs(dx);
+    const abs_dy = Math.abs(dy);
+    if (abs_dx < swipe_to_move && abs_dy < swipe_to_move) return;
+    if (abs_dx >= abs_dy) {
+        if (dx > 0) Move('right');
+        else Move('left');
+    }
+    else {
+        if (dy > 0) Move('down');
+        else Move('up');
+    }
+});
+window.onload = function() {
+    Game.Start();
 }
