@@ -1,78 +1,34 @@
-* {
-  -webkit-tap-highlight-color: transparent;
-}
 body {
-    user-select: none;
     margin: 0;
     overflow: hidden;
 }
-.game-page {
+#game-page {
     width: 100vw;
     height: 100vh;
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #game-div {
-    width: 450px;
-    height: 450px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #bababa;
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    grid-template-rows: 25% 25% 25% 25%;
-    padding: 20px;
-    border-radius: 10px;
     position: relative;
+    display: grid;
+    padding: 30px;
+    background-color: #bbb;
 }
 #game-div > div {
-    background-color: rgb(244, 244, 244);
-    margin: 7px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 35px;
-    font-family: arial;
-    border-radius: 5px;
-}
-#animation-div {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-#animation-div1 {
-    width: 100%;
-    height: 100%;
     position: relative;
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+    margin: 5px;
 }
-.animation {
-    position: absolute;
+#game-div > div, .animation-div {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 35px;
+    font-size: 30px;
     font-family: arial;
-    transition: 0.11s ease;
-    border-radius: 5px;
 }
-@media only screen and (max-width: 768px) {
-    #game-div {
-        width: 300px;
-        height: 300px;
-        padding: 6px;
-        border-radius: 8px;
-    }
-    #game-div > div {
-        margin: 5px;
-        font-size: 25px;
-        border-radius: 4px;
-    }
-    .animation {
-        font-size: 25px;
-        transition: 0.11s ease;
-        border-radius: 4px;
-    }
+.animation-div {
+    position: absolute;
+    transition: top 80ms linear, left 80ms linear;
 }

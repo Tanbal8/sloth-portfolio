@@ -1,0 +1,43 @@
+#game-div {
+    display: grid;
+    border: 2px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#game-div > div {
+    position: relative;
+    box-sizing: border-box;
+}
+.up {
+    border-top: 1px solid black;
+}
+.down {
+    border-bottom: 1px solid black;
+}
+.right {
+    border-right: 1px solid black;
+}
+.left {
+    border-left: 1px solid black;
+}
+.character::after {
+    content: "";
+    position: absolute;
+    inset: 10%;
+    background-color: blue;
+    border-radius: 50%;
+}
+.target::before {
+    inset: 10%;
+    background-color: red;
+}
+.character::after, .target::before {
+    content: "";
+    position: absolute;
+}
+#animation-div {
+    position: absolute;
+    transition: 50ms linear;
+}

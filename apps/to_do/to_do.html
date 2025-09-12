@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do</title>
+    <link rel="stylesheet" href="to_do.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div id="input-div">
+        <input type="text" id="az-input" dir="auto" placeholder="از">
+        <input type="text" id="ta-input" dir="auto" placeholder="تا">
+        <input type="text" id="kar-input" dir="auto" placeholder="کار">
+        <i id="submit-button" class="fa fa-check fa-2x" onclick="program.add()"></i>
+    </div>
+    <div id="list">
+        <span id="empty" style="display: none;">لیست خالی است!</span>
+    </div>
+    <div id="notifications-div"></div>
+    <script src="to_do.js"></script>
+</body>
+</html>

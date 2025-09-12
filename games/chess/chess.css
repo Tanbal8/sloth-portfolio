@@ -1,0 +1,121 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+#game-page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#game-div {
+    position: relative;
+    height: 85%;
+    aspect-ratio: 1;
+    border: 30px solid saddlebrown;
+    box-sizing: border-box;
+}
+#game-div > div {
+    aspect-ratio: 8;
+    display: flex;
+    flex-direction: row;
+}
+#game-div > div > div {
+    position: relative;
+    aspect-ratio: 1;
+    box-sizing: border-box;
+    color: white;
+    font-weight: 900;
+    -webkit-text-stroke: 0.5px black;
+}
+#game-div > div:nth-child(odd) > div:nth-child(odd), #game-div > div:nth-child(even) > div:nth-child(even) {
+    background-color: #ddd;
+}
+#game-div > div:nth-child(odd) > div:nth-child(even), #game-div > div:nth-child(even) > div:nth-child(odd) {
+    background-color: #555;
+}
+.white-rook, .white-knight, .white-bishop, .white-queen, .white-king, .white-pawn, .black-rook, .black-knight, .black-bishop, .black-queen, .black-king, .black-pawn {
+    background-size: 75% 75%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.white-rook {
+    background-image: url(../Code/image/chess2/white-rook.png);
+}
+.white-knight {
+    background-image: url(../Code/image/chess2/white-knight.png);
+}
+.white-bishop {
+    background-image: url(../Code/image/chess2/white-bishop.png);
+}
+.white-queen {
+    background-image: url(../Code/image/chess2/white-queen.png);
+}
+.white-king {
+    background-image: url(../Code/image/chess2/white-king.png);
+}
+.white-pawn {
+    background-image: url(../Code/image/chess2/white-pawn.png);
+}
+.black-rook {
+    background-image: url(../Code/image/chess2/black-rook.png);
+}
+.black-knight {
+    background-image: url(../Code/image/chess2/black-knight.png);
+}
+.black-bishop {
+    background-image: url(../Code/image/chess2/black-bishop.png);
+}
+.black-queen {
+    background-image: url(../Code/image/chess2/black-queen.png);
+}
+.black-king {
+    background-image: url(../Code/image/chess2/black-king.png);
+}
+.black-pawn {
+    background-image: url(../Code/image/chess2/black-pawn.png);
+}
+#animation-div {
+    position: absolute;
+    transition: top 0.1s linear, left 0.1s linear;
+}
+.available-cell::after {
+    content: "";
+    position: absolute;
+    width: 35%;
+    aspect-ratio: 1;
+    background-color: #333;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+#change-pawn-background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+#change-pawn-div {
+    padding: 30px 10px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    background-color: #ccc;
+}
+#change-pawn-div > div {
+    margin: 0 20px;
+    width: 80px;
+    aspect-ratio: 1;
+    cursor: pointer;
+    border-radius: 16px;
+    border: 3px solid #888;
+}
+.check {
+    background-color: red !important;
+}
