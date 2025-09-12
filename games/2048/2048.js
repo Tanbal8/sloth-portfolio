@@ -23,7 +23,6 @@ var Game = {
             }
         }
         for (let a = 0 ; a < 2 ; a++) this.Add_New_Cell();
-        this.div.style.height = '70%';
         this.div.style.aspectRatio = `${size.column}/${size.row}`;
         this.div.style.gridTemplateRows = `${100 / size.row}% `.repeat(size.row);
         this.div.style.gridTemplateColumns = `${100 / size.column}% `.repeat(size.column);
@@ -33,7 +32,8 @@ var Game = {
     End() {
         this.check = false;
         window.removeEventListener('keydown', Key_Press);
-        console.log(`Game Over!\nScore: ${Game.score}`);
+        alert(`Game Over!\nScore: ${Game.score}`);
+        this.Start();
     },
     End_Check() {
         if (!this.Has_Empty_Cell()) {

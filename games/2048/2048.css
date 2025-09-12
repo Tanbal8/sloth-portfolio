@@ -13,6 +13,7 @@ body {
     position: relative;
     display: grid;
     padding: 30px;
+    box-sizing: border-box;
     background-color: #bbb;
 }
 #game-div > div {
@@ -25,10 +26,64 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 2rem;
     font-family: arial;
 }
 .animation-div {
     position: absolute;
     transition: top 80ms linear, left 80ms linear;
+}
+@media (max-aspect-ratio: 1/1) {
+    #game-div {
+        width: 70%;
+    }
+}
+@media (min-aspect-ratio: 1/1) {
+    #game-div {
+        height: 70%;
+    }
+}
+@media (max-width: 1024px) {
+    #game-div {
+        padding: 25px;
+    }
+    #game-div > div {
+        margin: 4px;
+    }
+    #game-div > div, .animation-div {
+        font-size: 1.7rem;
+    }
+}
+@media (max-width: 768px) {
+    #game-div {
+        padding: 20px;
+    }
+    #game-div > div {
+        margin: 3px;
+    }
+    #game-div > div, .animation-div {
+        font-size: 1.6rem;
+    }
+}
+@media (max-width: 600px) {
+    #game-div {
+        padding: 15px;
+    }
+    #game-div > div {
+        margin: 3px;
+    }
+    #game-div > div, .animation-div {
+        font-size: 1.4rem;
+    }
+}
+@media (max-width: 414px) {
+    #game-div {
+        padding: 8px;
+    }
+    #game-div > div {
+        margin: 2.5px;
+    }
+    #game-div > div, .animation-div {
+        font-size: 1rem;
+    }
 }
