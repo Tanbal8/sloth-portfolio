@@ -18,7 +18,7 @@ var Game = {
         column: 4
     },
     chronometer: new Chronometer(document.getElementById('chronometer-minute'), document.getElementById('chronometer-second')),
-    div: document.getElementById("game-div"),
+    div: document.getElementById('game-div'),
     data: [],
     Start(size = this.default_size) {
         this.check = true;
@@ -29,20 +29,15 @@ var Game = {
             for (let cell of row)
                 cell.div.remove();
         this.data = Array.from({length: size.row}, () => Array(size.column));
-        let values_1d = Array.from({length: size.row * size.column}, (_, index) => index), values_2d = [];
-        for (let a = values_1d.length - 1 ; a >= 0 ; a--) {
-            let b = Math.floor(Math.random() * (a + 1));
-            [values_1d[a], values_1d[b]] = [values_1d[b], values_1d[a]];
-        }
-        for (let a = 0 ; a < size.column ; a++) values_2d.push(values_1d.splice(0, size.column));
+        let values = this.Create_Table();
         for (let y = 0 ; y < size.row ; y++)
             for (let x = 0 ; x < size.column ; x++) {
-                let cell = document.createElement("div");
+                let cell = document.createElement('div');
                 this.div.appendChild(cell);
-                cell.addEventListener("click", () => {
+                cell.addEventListener('click', () => {
                     Move(x, y);
                 }); 
-                let value = values_2d[y][x];
+                let value = values[y][x];
                 let type = value ? 'number' : 'empty';
                 this.data[y][x] = new Cell(x, y, cell, type, value);
             }
@@ -57,8 +52,19 @@ var Game = {
         for (let y = 0 ; y < this.size.row ; y++)
             for (let x = 0 ; x < this.size.column ; x++)
                 if (y != this.size.row - 1 || x != this.size.column - 1)
-                    if (this.data[y][x].value != y * this.size.row + x + 1) return false;
+                    if (this.data[y][x].value != y * this.size.column + x + 1) return false;
         return true;
+    },
+    Create_Table() {
+        let values_1d = Array.from({length: this.size.row * this.size.column}, (_, index) => index), values_2d = [];
+        for (let a = values_1d.length - 1 ; a >= 0 ; a--) {
+            let b = Math.floor(Math.random() * (a + 1));
+            [values_1d[a], values_1d[b]] = [values_1d[b], values_1d[a]];
+        }
+        values_1d = Fix_Table(values_1d);
+        for (let a = 0 ; a < this.size.column ; a++) values_2d.push(values_1d.splice(0, this.size.column));
+        return values_2d;
+
     }
 }
 function Translate(start, target) {
@@ -88,7 +94,7 @@ function Translate(start, target) {
 }
 async function Move(x, y) {
     const select = Game.data[y][x];
-    if (select.type == "number" && Game.check && !Game.delay_check) {
+    if (select.type == 'number' && Game.check && !Game.delay_check) {
         if (!Game.chronometer.check) Game.chronometer.Start();
         let empty, check = false;
         let animations = [];
@@ -145,7 +151,34 @@ async function Move(x, y) {
         if (Game.End_Check()) Game.End();
     }
 }
+function Fix_Table(list) {
+    let inversion = 0;
+    for (let a = 0 ; a < list.length - 1 ; a++) {
+        if (list[a] == 0) continue;
+        for (let b = a + 1 ; b < list.length ; b++) {
+            if (list[b] == 0) continue;
+            if (list[a] > list[b]) inversion++;
+        }
+    }
+    let is_solvable = true;
+    if (Game.size.column & 1) {
+        if (inversion & 1) is_solvable = false;
+    }
+    else {
+        let empty_index = list.indexOf(0);
+        let y_down = Game.size.row - Math.floor(empty_index / Game.size.column);
+        let number = inversion + y_down;
+        if (!(number & 1)) is_solvable = false;
+    }
+    if (!is_solvable) {
+        let swap = [];
+        for (let a = 0 ; a < list.length && swap.length < 2 ; a++) {
+            if (list[a] != 0) swap.push(a);
+        }
+        [list[swap[0]], list[swap[1]]] = [list[swap[1]], list[swap[0]]];
+    }
+    return list;
+}
 window.onload = () => {
     Game.Start();
 }
-                
