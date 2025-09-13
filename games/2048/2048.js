@@ -233,7 +233,7 @@ function Translate(current_position, target_position) {
     });
 }
 function Merge(current_position, target_position) {
-    return new Promise(async (resolve) => {
+    return new Promise(async resolve => {
         let number = Game.data[current_position.y][current_position.x].number * 2;
         await Translate(current_position, target_position);
         Update_Cell(target_position, number);
