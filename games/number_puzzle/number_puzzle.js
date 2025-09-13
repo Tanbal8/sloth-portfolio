@@ -7,7 +7,7 @@ class Cell {
         this.type = type;
         this.value = value;
         if (type == 'number') div.textContent = value;
-        else div.setAttribute('id', 'empty');
+        else div.classList.add('empty');
     }
 }
 var Game = {
@@ -75,17 +75,14 @@ function Translate(start, target) {
         [start.value, target.value] = [target.value, start.value];
         Game.div.appendChild(animation_div);
         start.div.textContent = '';
-        start.div.setAttribute('id', 'empty');
+        start.div.classList.add('empty');
         animation_div.style.top = `${target.div.offsetTop}px`;
         animation_div.style.left = `${target.div.offsetLeft}px`;
         setTimeout(() => {
-            target.div.removeAttribute('id', 'empty');
+            target.div.classList.remove('empty');
             target.div.textContent = target.value;
             animation_div.remove();
             resolve();
-            setTimeout(() => {
-                Game.delay_check = false;
-            }, 10)
         }, 100);
     })
 }
@@ -94,12 +91,13 @@ async function Move(x, y) {
     if (select.type == "number" && Game.check && !Game.delay_check) {
         if (!Game.chronometer.check) Game.chronometer.Start();
         let empty, check = false;
+        let animations = [];
         for (let x = select.x - 1 ; x >= 0 ; x--) {
             if (Game.data[select.y][x].type == 'empty') {
                 check = true;
                 empty = Game.data[select.y][x];
                 for (let a = empty.x + 1 ; a <= select.x ; a++) {
-                    Translate(Game.data[select.y][a], Game.data[select.y][a - 1]);
+                    animations.push(Translate(Game.data[select.y][a], Game.data[select.y][a - 1]));
                 }
                 break;
             }
@@ -110,7 +108,7 @@ async function Move(x, y) {
                     empty = Game.data[select.y][x];
                     check = true;
                     for (let a = empty.x - 1 ; a >= select.x ; a--) {
-                        Translate(Game.data[select.y][a], Game.data[select.y][a + 1]);
+                        animations.push(Translate(Game.data[select.y][a], Game.data[select.y][a + 1]));
                     }
                     break;
                 }
@@ -122,7 +120,7 @@ async function Move(x, y) {
                     check = true;
                     empty = Game.data[y][select.x];
                     for (let a = empty.y + 1 ; a <= select.y ; a++) {
-                        Translate(Game.data[a][select.x], Game.data[a - 1][select.x]);
+                        animations.push(Translate(Game.data[a][select.x], Game.data[a - 1][select.x]));
                     }
                     break;
                 }
@@ -134,11 +132,15 @@ async function Move(x, y) {
                     check = true;
                     empty = Game.data[y][select.x];
                     for (let a = empty.y - 1 ; a >= select.y ; a--) {
-                        Translate(Game.data[a][select.x], Game.data[a + 1][select.x]);
+                        animations.push(Translate(Game.data[a][select.x], Game.data[a + 1][select.x]));
                     }
                     break;
                 }
             }
+        }
+        if (animations.length) {
+            await Promise.all(animations);
+            Game.delay_check = false;
         }
         if (Game.End_Check()) Game.End();
     }
