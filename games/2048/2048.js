@@ -196,7 +196,7 @@ async function Move(direction) {
             }
             break;
     }
-    if (animations.length > 0) {
+    if (animations.length) {
         await Promise.all(animations)
         .then(() => {
             Game.Add_New_Cell();
@@ -292,12 +292,12 @@ function Key_Press(event) {
 }
 let start_x, start_y;
 const swipe_to_move = 30;
-document.addEventListener("touchstart", e => {
+document.addEventListener('touchstart', e => {
     const touch = e.touches[0];
     start_x = touch.clientX;
     start_y = touch.clientY;
 });
-document.addEventListener("touchend", e => {
+document.addEventListener('touchend', e => {
     const touch = e.changedTouches[0];
     const dx = touch.clientX - start_x;
     const dy = touch.clientY - start_y;
