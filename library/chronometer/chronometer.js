@@ -13,8 +13,8 @@ class Chronometer {
                 this.second = 0;
                 this.minute++;
             }
-            this.minute_div.innerHTML = (this.minute < 10) ? "0" + this.minute : this.minute;
-            this.second_div.innerHTML = (this.second < 10) ? "0" + this.second : this.second;
+            this.minute_div.textContent = (this.minute < 10) ? "0" + this.minute : this.minute;
+            this.second_div.textContent = (this.second < 10) ? "0" + this.second : this.second;
         }, 1000);
     }
     Stop() {
@@ -22,14 +22,14 @@ class Chronometer {
         clearInterval(this.interval);
     }
     Reset() {
-        if (this.check) this.stop();
+        if (this.check) this.Stop();
         this.minute = 0;
         this.second = 0;
-        this.minute_div.innerHTML = '00';
-        this.second_div.innerHTML = '00';
+        this.minute_div.textContent = '00';
+        this.second_div.textContent = '00';
     }
     To_string() {
-        return this.minute.padStart(2, '0') + " : " + this.second.padStart(2, '0');
+        return this.minute.toString().padStart(2, '0') + " : " + this.second.toString().padStart(2, '0');
     }
 }
 export default Chronometer;
