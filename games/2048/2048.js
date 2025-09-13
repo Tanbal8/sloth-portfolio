@@ -53,7 +53,7 @@ var Game = {
     },
     Add_New_Cell() {
         let position = this.Empty_Cell();
-        let number = Math.random() < Chance_4 != 1 ? 2 : 4;
+        let number = Math.random() < Chance_4 ? 4 : 2;
         Update_Cell(position, number);
         if (this.End_Check()) this.End();
     },
@@ -88,7 +88,7 @@ function Update_Cell(position, number, delay_check = false) {
     data.number = number;
     setTimeout(() => {
         cell.innerHTML = data.number;
-        cell.style.backgroundColor = Background_Color(data.number);
+        cell.style.backgroundColor = Colors[data.number];
     }, delay);
 }
 async function Move(direction) {
@@ -207,6 +207,22 @@ async function Move(direction) {
         .catch(error => { console.error('Error', error) });
     }
 }
+const Colors = {
+        2: '#ffdaff',
+        4: '#fdddad',
+        8: '#feb856',
+        16: '#ff9456',
+        32: '#ff6d54',
+        64: '#fe714d',
+        128: '#fddb51',
+        256: '#ffd960',
+        512: '#ffda5a',
+        1024: '#ffb657',
+        2048: '#feb608',
+        4096: '#a36ae0',
+        8192: '#7b3ce6',
+        16384: '#4b1dae'
+}
 function Translate(current_position, target_position) {
     return new Promise(resolve => {
         Game.delay_check = true;
@@ -223,7 +239,7 @@ function Translate(current_position, target_position) {
         animation_div.style.top = `${target_div.offsetTop}px`;
         animation_div.style.left = `${target_div.offsetLeft}px`;
         animation_div.innerHTML = number;
-        animation_div.style.backgroundColor = Background_Color(number);
+        animation_div.style.backgroundColor = Colors[number];
         Update_Cell(target_position, number, true);
         Clear_Cell(current_position);
         setTimeout(() => {
@@ -240,38 +256,6 @@ function Merge(current_position, target_position) {
         Game.score += number;
         resolve();
     });
-}
-function Background_Color(number) {
-    switch (number) {
-        case 2 :
-            return '#ffdaff';
-        case 4 :
-            return '#fdddad';
-        case 8 :
-            return '#feb856';
-        case 16 :
-            return '#ff9456';
-        case 32 :
-            return '#ff6d54';
-        case 64 :
-            return '#fe714d';
-        case 128 :
-            return '#fddb51';
-        case 256 :
-            return '#ffd960';
-        case 512 :
-            return '#ffda5a';
-        case 1024 :
-            return '#ffb657';
-        case 2048 :
-            return '#feb608';
-        case 4096 :
-            return '#a36ae0';
-        case 8192 :
-            return '#7b3ce6';
-        case 16384 :
-            return '#4b1dae';
-    }
 }
 function Key_Press(event) {
     if (Game.delay_check) return;
