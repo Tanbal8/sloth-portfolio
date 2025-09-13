@@ -10,6 +10,9 @@
     font-family: vazir;
     src: url(../../fonts/persian/Vazir.ttf);
 }
+* {
+  -webkit-tap-highlight-color: transparent;
+}
 :root {
     --success: green;
     --alert: red;
