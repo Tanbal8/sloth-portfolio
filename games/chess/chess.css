@@ -44,40 +44,40 @@ body {
     background-repeat: no-repeat;
 }
 .white-rook {
-    background-image: url(../Code/image/chess2/white-rook.png);
+    background-image: url(../../images/chess/white-rook.png);
 }
 .white-knight {
-    background-image: url(../Code/image/chess2/white-knight.png);
+    background-image: url(../../images/chess/white-knight.png);
 }
 .white-bishop {
-    background-image: url(../Code/image/chess2/white-bishop.png);
+    background-image: url(../../images/chess/white-bishop.png);
 }
 .white-queen {
-    background-image: url(../Code/image/chess2/white-queen.png);
+    background-image: url(../../images/chess/white-queen.png);
 }
 .white-king {
-    background-image: url(../Code/image/chess2/white-king.png);
+    background-image: url(../../images/chess/white-king.png);
 }
 .white-pawn {
-    background-image: url(../Code/image/chess2/white-pawn.png);
+    background-image: url(../../images/chess/white-pawn.png);
 }
 .black-rook {
-    background-image: url(../Code/image/chess2/black-rook.png);
+    background-image: url(../../images/chess/black-rook.png);
 }
 .black-knight {
-    background-image: url(../Code/image/chess2/black-knight.png);
+    background-image: url(../../images/chess/black-knight.png);
 }
 .black-bishop {
-    background-image: url(../Code/image/chess2/black-bishop.png);
+    background-image: url(../../images/chess/black-bishop.png);
 }
 .black-queen {
-    background-image: url(../Code/image/chess2/black-queen.png);
+    background-image: url(../../images/chess/black-queen.png);
 }
 .black-king {
-    background-image: url(../Code/image/chess2/black-king.png);
+    background-image: url(../../images/chess/black-king.png);
 }
 .black-pawn {
-    background-image: url(../Code/image/chess2/black-pawn.png);
+    background-image: url(../../images/chess/black-pawn.png);
 }
 #animation-div {
     position: absolute;
