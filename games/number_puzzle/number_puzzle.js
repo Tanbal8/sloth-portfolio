@@ -13,16 +13,17 @@ class Cell {
 var Game = {
     check: false,
     delay_check: true,
-    size: {
+    default_size: {
         row: 4,
         column: 4
     },
     chronometer: new Chronometer(document.getElementById('chronometer-minute'), document.getElementById('chronometer-second')),
     div: document.getElementById("game-div"),
     data: [],
-    Start(size = this.size) {
+    Start(size = this.default_size) {
         this.check = true;
         this.delay_check = false;
+        this.size = size;
         Game.chronometer.Reset();
         for (let row of this.data)
             for (let cell of row)
@@ -48,6 +49,16 @@ var Game = {
     },
     End() {
         this.check = false;
+        alert(Game.chronometer.To_string());
+        Game.Start();
+    },
+    End_Check() {
+        let end_check = true;
+        for (let y = 0 ; y < this.size.row ; y++)
+            for (let x = 0 ; x < this.size.column ; x++)
+                if (y != this.size.row - 1 || x != this.size.column - 1)
+                    if (this.data[y][x].value != y * this.size.row + x + 1) return false;
+        return true;
     }
 }
 function Translate(start, target) {
@@ -71,8 +82,10 @@ function Translate(start, target) {
             target.div.removeAttribute('id', 'empty');
             target.div.textContent = target.value;
             animation_div.remove();
-            Game.delay_check = false;
             resolve();
+            setTimeout(() => {
+                Game.delay_check = false;
+            }, 10)
         }, 100);
     })
 }
@@ -127,18 +140,7 @@ async function Move(x, y) {
                 }
             }
         }
-        // let end_check = true;
-        // for (let c = 0 ; c < 15 ; c++) {    
-            //     if (all[c].value != c + 1) {
-                //         end_check = false;
-                //     }
-                // }
-                // if (end_check) {
-                    //     clearInterval(timer);
-                    //     if(confirm(timer_m + " : " + timer_s + "\n" + "restart ?")) {
-                        //         start_game();
-                        //     }
-                        // }
+        if (Game.End_Check()) Game.End();
     }
 }
 window.onload = () => {
