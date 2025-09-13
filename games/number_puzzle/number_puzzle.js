@@ -1,163 +1,147 @@
-var puzzle_div = document.querySelector(".puzzle-div2");
-var animation_div =  document.querySelector(".animation2");
-var all = [];
-var changeable = true;
-var timer;
-// var timer_s_div = document.querySelector("");
-// var timer_s_div = document.querySelector("");
-var timer_m, timer_s;
-var rowAndColumnNum = 4;
-start_game();
-function all_function() {
-    for (let a = 0 ; a < all.length ; a++) {
-        all[a].div.remove();
-    }
-    all = [];
-    for (let a = 0 ; a < rowAndColumnNum ** 2 ; a++) {
-        let x = (a + 1) % rowAndColumnNum;
-        if (x == 0) x = rowAndColumnNum;
-        let y = ((16 - a) + (x - 1)) / rowAndColumnNum;
-        let number = a + 1;
-        let div = document.createElement("div");
-        puzzle_div.appendChild(div);
-        all.push({x: x, y: y, number: number, div: div, value: 0, type: ''});
+import Chronometer from '../../library/chronometer/chronometer.js';
+class Cell {
+    constructor(x, y, div, type = 'number', value = 0) {
+        this.x = x;
+        this.y = y;
+        this.div = div;
+        this.type = type;
+        this.value = value;
+        if (type == 'number') div.textContent = value;
+        else div.setAttribute('id', 'empty');
     }
 }
-function start_game() {
-    all_function();
-    for (let a = 0 ; a < rowAndColumnNum ** 2 ; a++) {
-        all[a].value = 0;
-        all[a].div.innerHTML = "";
-        all[a].x_position = all[a].div.offsetLeft;
-        all[a].y_position = all[a].div.offsetTop;
-        all[a].div.onclick = function() {
-            if (all[a].type == "number" && changeable) {
-                let select_x = all[a].x;
-                let select_y = all[a].y;
-                let empty_x;
-                let empty_y;
-                for (let b = 0 ; b < 16 ; b++) {
-                    if (all[b].type == "empty") {
-                        empty_x = all[b].x;
-                        empty_y = all[b].y;
-                        if (select_x == empty_x) {
-                            if (select_y > empty_y) {
-                                for (let c = b ; c > a ; c -= 4) {
-                                    move_function(all[c - 4], all[c]);
-                                }
-                            }
-                            else if (select_y < empty_y) {
-                                for (let c = b ; c < a ; c += 4) {
-                                    move_function(all[c+4], all[c]);
-                                }
-                            }
-                        }
-                        if (select_y == empty_y) {
-                            if (select_x > empty_x) {
-                                for (let c = b ; c < a ; c++) {
-                                    move_function(all[c+1], all[c]);
-                                }
-                            }
-                            else if (select_x < empty_x) {
-                                for (let c = b ; c > a ; c--) {
-                                    move_function(all[c-1], all[c]);
-                                }
-                            }
-    
-                        }
-                    }
+var Game = {
+    check: false,
+    delay_check: true,
+    size: {
+        row: 4,
+        column: 4
+    },
+    chronometer: new Chronometer(document.getElementById('chronometer-minute'), document.getElementById('chronometer-second')),
+    div: document.getElementById("game-div"),
+    data: [],
+    Start(size = this.size) {
+        this.check = true;
+        this.delay_check = false;
+        Game.chronometer.Reset();
+        for (let row of this.data)
+            for (let cell of row)
+                cell.div.remove();
+        this.data = Array.from({length: size.row}, () => Array(size.column));
+        let values_1d = Array.from({length: size.row * size.column}, (_, index) => index), values_2d = [];
+        for (let a = values_1d.length - 1 ; a >= 0 ; a--) {
+            let b = Math.floor(Math.random() * (a + 1));
+            [values_1d[a], values_1d[b]] = [values_1d[b], values_1d[a]];
+        }
+        for (let a = 0 ; a < size.column ; a++) values_2d.push(values_1d.splice(0, size.column));
+        for (let y = 0 ; y < size.row ; y++)
+            for (let x = 0 ; x < size.column ; x++) {
+                let cell = document.createElement("div");
+                this.div.appendChild(cell);
+                cell.addEventListener("click", () => {
+                    Move(x, y);
+                }); 
+                let value = values_2d[y][x];
+                let type = value ? 'number' : 'empty';
+                this.data[y][x] = new Cell(x, y, cell, type, value);
+            }
+    },
+    End() {
+        this.check = false;
+    }
+}
+function Translate(start, target) {
+    return new Promise(resolve => {
+        Game.delay_check = true;
+        const animation_div = document.createElement('span');
+        animation_div.classList.add('animation-div');
+        animation_div.textContent = start.value;
+        animation_div.style.width = `${start.div.offsetWidth}px`;
+        animation_div.style.height = `${start.div.offsetHeight}px`;
+        animation_div.style.top = `${start.div.offsetTop}px`;
+        animation_div.style.left = `${start.div.offsetLeft}px`;
+        [start.type, target.type] = [target.type, start.type];
+        [start.value, target.value] = [target.value, start.value];
+        Game.div.appendChild(animation_div);
+        start.div.textContent = '';
+        start.div.setAttribute('id', 'empty');
+        animation_div.style.top = `${target.div.offsetTop}px`;
+        animation_div.style.left = `${target.div.offsetLeft}px`;
+        setTimeout(() => {
+            target.div.removeAttribute('id', 'empty');
+            target.div.textContent = target.value;
+            animation_div.remove();
+            Game.delay_check = false;
+            resolve();
+        }, 100);
+    })
+}
+async function Move(x, y) {
+    const select = Game.data[y][x];
+    if (select.type == "number" && Game.check && !Game.delay_check) {
+        if (!Game.chronometer.check) Game.chronometer.Start();
+        let empty, check = false;
+        for (let x = select.x - 1 ; x >= 0 ; x--) {
+            if (Game.data[select.y][x].type == 'empty') {
+                check = true;
+                empty = Game.data[select.y][x];
+                for (let a = empty.x + 1 ; a <= select.x ; a++) {
+                    Translate(Game.data[select.y][a], Game.data[select.y][a - 1]);
                 }
-                let end_check = true;
-                for (let c = 0 ; c < 15 ; c++) {
-                    if (all[c].value != c + 1) {
-                        end_check = false;
+                break;
+            }
+        }
+        if (!check) {
+            for (let x = select.x + 1 ; x < Game.size.column ; x++) {
+                if (Game.data[select.y][x].type == 'empty') {
+                    empty = Game.data[select.y][x];
+                    check = true;
+                    for (let a = empty.x - 1 ; a >= select.x ; a--) {
+                        Translate(Game.data[select.y][a], Game.data[select.y][a + 1]);
                     }
-                }
-                if (end_check) {
-                    clearInterval(timer);
-                    if(confirm(timer_m + " : " + timer_s + "\n" + "restart ?")) {
-                        start_game();
-                    }
+                    break;
                 }
             }
         }
-    }
-    for (let a = 0 ; a < 16 ; a++) {
-        number();
-        function number() {
-            let n = Math.floor((Math.random() * 16) + 1);
-            let check = true;
-            for (let b = 0 ; b < 16 ; b++) {
-                if (all[b].value == n) {
-                    check = false;
+        if (!check) {
+            for (let y = select.y - 1 ; y >= 0 ; y--) {
+                if (Game.data[y][select.x].type == 'empty') {
+                    check = true;
+                    empty = Game.data[y][select.x];
+                    for (let a = empty.y + 1 ; a <= select.y ; a++) {
+                        Translate(Game.data[a][select.x], Game.data[a - 1][select.x]);
+                    }
+                    break;
                 }
-            }
-            if (check) {
-                all[a].value = n;
-                if (n == 16) {
-                    all[a].div.classList.add("empty");
-                    all[a].div.innerHTML = "";
-                    all[a].type = "empty";
-                }
-                else {
-                    all[a].div.classList.remove("empty");
-                    all[a].div.innerHTML = n;
-                    all[a].type = "number";
-                }
-            }
-            else {
-                number();
             }
         }
-    }
-    timer_s = 0;
-    timer_m = 0;
-    timer = setInterval(function() {
-        timer_s++;
-        if (timer_s >= 60) {
-            timer_s = 0;
-            timer_m++;
+        if (!check) {
+            for (let y = select.y + 1 ; y < Game.size.row ; y++) {
+                if (Game.data[y][select.x].type == 'empty') {
+                    check = true;
+                    empty = Game.data[y][select.x];
+                    for (let a = empty.y - 1 ; a >= select.y ; a--) {
+                        Translate(Game.data[a][select.x], Game.data[a + 1][select.x]);
+                    }
+                    break;
+                }
+            }
         }
-    }, 1000);
+        // let end_check = true;
+        // for (let c = 0 ; c < 15 ; c++) {    
+            //     if (all[c].value != c + 1) {
+                //         end_check = false;
+                //     }
+                // }
+                // if (end_check) {
+                    //     clearInterval(timer);
+                    //     if(confirm(timer_m + " : " + timer_s + "\n" + "restart ?")) {
+                        //         start_game();
+                        //     }
+                        // }
+    }
 }
-function move_function(object1, object2) {
-    changeable = false;
-    setTimeout(function() {
-        changeable = true;
-    }, 100);
-    let num1 = object1.number;
-    let num2 = object2.number;
-    let div1 = object1.div;
-    let div2 = object2.div;
-    let type1 = object1.type;
-    let type2 = object2.type;
-    let value1 = object1.value;
-    let value2 = object2.value;
-    all[num1-1].type = type2;
-    all[num2-1].type = type1;
-    all[num1-1].value = value2;
-    all[num2-1].value = value1;
-    div1.classList.add("empty");
-    div2.classList.remove("empty");
-    div2.innerHTML = value1;
-    div1.innerHTML = "";
-    let animation = document.createElement("div");
-    animation.classList.add("animation-div");
-    animation.style.width = div2.offsetWidth + "px";
-    animation.style.height = div2.offsetHeight + "px";
-    animation.style.top = object1.y_position + "px";
-    animation.style.left = object1.x_position + "px";
-    animation.innerHTML = value1;
-    animation_div.appendChild(animation);
-    setTimeout(function() {
-        animation.style.top = object2.y_position + "px";
-        animation.style.left = object2.x_position + "px";
-    }, 10);
-    div2.style.visibility = "hidden";
-    setTimeout(function() {
-        div2.style.visibility = "visible";
-        setTimeout(function() {
-            animation_div.innerHTML = "";
-        }, 10)
-    }, 110)
+window.onload = () => {
+    Game.Start();
 }
+                

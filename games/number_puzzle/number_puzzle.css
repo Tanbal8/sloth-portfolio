@@ -9,43 +9,39 @@
     --color5: #ea7317;
     --shadow: #032336;
 }
-.game-page {
+#game-page {
     width: 100vw;
     height: 100vh;
     position: relative;
     background-color: var(--color1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 body {
     margin: 0;
     user-select: none;
 }
-.puzzle-div1 {
+#game-div {
+    aspect-ratio: 1;
     background-color: var(--color4);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    position: relative;
     border-radius: 10px;
     box-shadow: 3px 3px 5px var(--shadow) inset;
-}
-.puzzle-div2 {
-    width: 450px;
-    aspect-ratio: 1;
-    position: relative;
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
     grid-template-rows: 25% 25% 25% 25%;
-    box-sizing: border-box;
     padding: 5px;
+    box-sizing: border-box;
 }
-.puzzle-div2 > div {
+#game-div > div {
     margin: 5px;
 }
-.puzzle-div2 > div:not(.empty) {
+#game-div > div:not(#empty) {
     cursor: pointer;
     z-index: 2;
 }
-.puzzle-div2 > div:not(.empty), .animation-div {
+#game-div > div:not(#empty), .animation-div {
     background-color: var(--color5);
     color: white;
     -webkit-text-stroke: 2px black;
@@ -58,36 +54,43 @@ body {
     font-weight: 800;
     box-shadow: 3px 3px 5px var(--shadow);
 }
-.animation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-.animation2 {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
 .animation-div {
     position: absolute;
     transition: 0.1s ease;
+    z-index: 3;
+}
+#chronometer-div {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: row;
+}
+#chronometer-div > div {
+    margin: 0 5px;
+    font-size: 1.2rem;
+    font-family: arial;
+}
+@media (max-aspect-ratio: 1/1) {
+    #game-div {
+        width: 70%;
+    }
+}
+@media (min-aspect-ratio: 1/1) {
+    #game-div {
+        height: 70%;
+    }
 }
 @media only screen and (max-width: 1025px) {
-    .puzzle-div1 {
+    #game-div {
         border-radius: 9px;
         box-shadow: 3px 3px 4px var(--shadow) inset;
-    }
-    .puzzle-div2 {
-        width: 400px;
         padding: 4px;
     }
-    .puzzle-div2 > div {
+    #game-div > div {
         margin: 4px;
     }
-    .puzzle-div2 > div:not(.empty), .animation-div {
+    #game-div > div:not(#empty), .animation-div {
         -webkit-text-stroke: 1.5px black;
         border-radius: 9px;
         font-size: 32px;
@@ -95,18 +98,15 @@ body {
     }
 }
 @media only screen and (max-width: 768px) {
-    .puzzle-div1 {
+    #game-div {
         border-radius: 8px;
         box-shadow: 2px 2px 4px var(--shadow) inset;
-    }
-    .puzzle-div2 {
-        width: 350px;
         padding: 3px;
     }
-    .puzzle-div2 > div {
+    #game-div > div {
         margin: 3px;
     }
-    .puzzle-div2 > div:not(.empty), .animation-div {
+    #game-div > div:not(#empty), .animation-div {
         -webkit-text-stroke: 1px black;
         border-radius: 8px;
         font-size: 29px;
@@ -114,18 +114,15 @@ body {
     }
 }
 @media only screen and (max-width: 481px) {
-    .puzzle-div1 {
+    #game-div {
         border-radius: 7px;
         box-shadow: 2px 2px 3px var(--shadow) inset;
-    }
-    .puzzle-div2 {
-        width: 75vw;
         padding: 3px;
     }
-    .puzzle-div2 > div {
+    #game-div > div {
         margin: 3px;
     }
-    .puzzle-div2 > div:not(.empty), .animation-div {
+    #game-div > div:not(#empty), .animation-div {
         -webkit-text-stroke: 1px black;
         border-radius: 7px;
         font-size: 25px;
