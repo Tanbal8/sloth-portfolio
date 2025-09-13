@@ -44,3 +44,13 @@
     position: absolute;
     transition: 50ms linear;
 }
+@media (max-aspect-ratio: 1/1) {
+    #game-div {
+        width: 75%;
+    }
+}
+@media (min-aspect-ratio: 1/1) {
+    #game-div {
+        height: 75%;
+    }
+}
