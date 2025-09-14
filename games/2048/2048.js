@@ -37,16 +37,14 @@ var Game = {
     },
     End_Check() {
         if (!this.Has_Empty_Cell()) {
-            for (let y = 0 ; y < Game.data.length ; y++) {
-                for (let x = 0 ; x < Game.data[y].length ; x++) {
-                    if ((y > 0 && this.data[y][x].number == this.data[y - 1][x].number) ||
-                        (y < Game.size.row - 1 && this.data[y][x].number == this.data[y + 1][x].number) ||
-                        (x > 0 && this.data[y][x].number == this.data[y][x - 1].number) ||
-                        (x < Game.size.column - 1 && this.data[y][x].number == this.data[y][x + 1].number)) {
-                        return false;
-                    }
+            data.forEach((row, y) => row.forEach((cell, x) => {
+                if ((y > 0 && this.data[y][x].number == this.data[y - 1][x].number) ||
+                    (y < Game.size.row - 1 && this.data[y][x].number == this.data[y + 1][x].number) ||
+                    (x > 0 && this.data[y][x].number == this.data[y][x - 1].number) ||
+                    (x < Game.size.column - 1 && this.data[y][x].number == this.data[y][x + 1].number)) {
+                    return false;
                 }
-            }
+            }));
             return true;
         }
         return false;
@@ -58,10 +56,7 @@ var Game = {
         if (this.End_Check()) this.End();
     },
     Has_Empty_Cell() {
-        for (let y = 0 ; y < this.data.length ; y++)
-            for (let x = 0 ; x < this.data[y].length ; x++)
-                if (this.data[y][x].type == 'empty') return true;
-        return false;
+        return this.data.some(row => row.some(cell => cell.type == 'empty'));
     },
     Empty_Cell() {
         let x = Math.floor(Math.random() * this.size.column);
