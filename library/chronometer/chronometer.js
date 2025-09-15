@@ -13,8 +13,8 @@ class Chronometer {
                 this.second = 0;
                 this.minute++;
             }
-            this.minute_div.textContent = (this.minute < 10) ? "0" + this.minute : this.minute;
-            this.second_div.textContent = (this.second < 10) ? "0" + this.second : this.second;
+            this.minute_div.textContent = this.minute.toString().padStart(2, '0');
+            this.second_div.textContent = this.second.toString().padStart(2, '0');
         }, 1000);
     }
     Stop() {
