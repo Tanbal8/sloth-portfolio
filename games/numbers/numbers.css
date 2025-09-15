@@ -1,0 +1,186 @@
+@font-face {
+    font-family: Segoe;
+    src: url(../../fonts/english/Segoe.UI_p30download.com.ttf);
+}
+@font-face {
+    font-family: Bungee;
+    src: url(../../fonts/english/Bungee-Regular.ttf);
+}
+* {
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+:root {
+    --color1: #2364aa;
+    --color2: #3da5d9;
+    --color3: #73bfb8;
+    --color4: #fec601;
+    --color5: #ea7317;
+    --shadow: #032336;
+    --border-width: 8px;
+}
+body {
+    margin: 0;
+}
+#game-page {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background-color: var(--color1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#game-div {
+    aspect-ratio: 1;
+    background-color: var(--color5);
+    border-width: 15px;
+    border-style: solid;
+    border-color: #ee8739 #df6b12 #d1630f #ec7c26;
+    display: grid;
+    padding: 6px;
+    box-sizing: border-box;
+}
+#game-div > div {
+    margin: 4px;
+}
+.number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    font-family: Segoe;
+    font-weight: 900;
+    color: white;
+    background-color: var(--color4);
+    border-width: var(--border-width);
+    border-style: solid;
+    border-color: #ffd745 #fea501 #fe9901 #ffcf24;
+    text-shadow: -1.5px -1.5px var(--shadow), 0 -2px var(--shadow), 1.5px -1.5px var(--shadow), -2px 0 var(--shadow), 2px 0 var(--shadow), -1.5px 1.5px var(--shadow), 0 2px var(--shadow), 1.5px 1.5px var(--shadow), 0 0 3px var(--shadow);
+    box-sizing: border-box;
+}
+.empty {
+    background-color: var(--color4);
+    border-width: var(--border-width);
+    border-style: solid;
+    animation: shadow 0.1s forwards;
+}
+@keyframes shadow {
+    from {
+        border-color: #ffd745 #fea501 #fe9901 #ffcf24;
+    }
+    to {
+        border-color: #fe9901 #ffcf24 #ffd745 #fea501;
+    }
+}
+#panel-div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+}
+#panel-div > div {
+    background-color: var(--color4);
+    color: white;
+    -webkit-text-stroke: 2px black;
+    display: flex;
+    border-width: var(--border-width);
+    border-style: solid;
+    border-color: #ffd745 #fea501 #fe9901 #ffcf24;
+    font-family: Bungee;
+    height: 50px;
+    font-size: 1.8rem;
+}
+#target-panel {
+    aspect-ratio: 1;
+    justify-content: center;
+    align-items: center;
+}
+#timer-panel {
+    flex-direction: row;
+    align-items: center;
+    padding: 0 15px;
+}
+#timer-panel > div:not(:last-child) {
+    margin-right: 15px;
+}
+@media (max-aspect-ratio: 1/1) {
+    #game-div {
+        width: 70%;
+    }
+}
+@media (min-aspect-ratio: 1/1) {
+    #game-div {
+        height: 70%;
+    }
+}
+@media only screen and (max-width: 1025px) {
+    :root {
+        --border-width: 7px;
+    }
+    #game-div {
+        border-width: 13px;
+        padding: 6px;
+    }
+    #game-div > div {
+        margin: 4px;
+    }
+    .number {
+        font-size: 1.6rem;
+        font-weight: 900;
+    }
+    #panel-div > div {
+        height: 43px;
+        font-size: 1.5rem;
+    }
+    #timer-panel {
+        padding: 0 12px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    :root {
+        border-width: 6px;
+    }
+    #game-div {
+        border-width: 10px;
+        padding: 4px;
+    }
+    #game-div > div {
+        margin: 3px;
+    }
+    .number {
+        font-size: 1.2em;
+        text-shadow: -1px -1px var(--shadow), 0 -1px var(--shadow), 1px -1px var(--shadow), -1px 0 var(--shadow), 1px 0 var(--shadow), -1px 1px var(--shadow), 0 1px var(--shadow), 1px 1px var(--shadow), 0 0 3px var(--shadow);
+    }
+    #panel-div > div {
+        height: 40px;
+        -webkit-text-stroke: 1px black;
+    }
+    #timer-panel {
+        padding: 0 10px;
+    }
+}
+@media only screen and (max-width: 481px) {
+    :root {
+        --border-width: 4px;
+    }
+    #game-div {
+        border-width: 8px;
+        padding: 3px;
+        min-width: 200px;
+    }
+    #game-div > div {
+        margin: 2px;
+    }
+    .number {
+        font-size: 0.9rem;
+    }
+    #panel-div > div {
+        height: 30px;
+        font-size: 1.2rem;
+    }
+    #timer-panel {
+        padding: 0 8px;
+    }
+}
