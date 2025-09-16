@@ -158,7 +158,7 @@ class Cell {
 var Game = {
     check: false,
     delay_check: false,
-    free_to_play: true,
+    free_to_play: false,
     div: document.getElementById('game-div'),
     upgrade_pawn_div: document.getElementById('change-pawn-background'),
     upgrade_pawn_buttons: document.querySelectorAll('#change-pawn-div > div'),
@@ -329,10 +329,6 @@ var Game = {
         this.turn = Get_Opponent(this.turn);
     }
 }
-window.onload = () => {
-    Game.Start();
-    
-}
 function Click(position) {
     if (Game.delay_check) return;
     let [x, y] = [position.x, position.y];
@@ -394,9 +390,12 @@ function Move_Animaiton(start, target) {
             if (target.type == 'piece') target.div.classList.remove(target.team + '-' + target.piece);
             target.div.classList.add(start.team + '-' + start.piece);
             animaiton_div.remove();
-           resolve();
+            resolve();
         }, 100);
     });
 }
 let Get_Opponent = (team) => team == 'white' ? 'black' : 'white';
 let Get_King = (team) => Game.data.map(row => row.filter(cell => cell.team == team && cell.piece == 'king')).flat()[0];
+window.onload = () => {
+    Game.Start(); 
+}

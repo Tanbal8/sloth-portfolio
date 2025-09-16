@@ -14,9 +14,12 @@ body {
 }
 #game-div {
     position: relative;
-    height: 85%;
     aspect-ratio: 1;
-    border: 30px solid saddlebrown;
+    background-color: saddlebrown;
+    padding: 1vw;
+    border-width: 2vw;
+    border-style: solid;
+    border-color: rgb(183, 107, 52) rgb(124, 59, 13) rgb(83, 39, 8) rgb(168, 92, 39);
     box-sizing: border-box;
 }
 #game-div > div {
@@ -121,4 +124,14 @@ body {
 }
 .check {
     background-color: red !important;
+}
+@media (max-aspect-ratio: 1/1) {
+    #game-div {
+        width: 85%;
+    }
+}
+@media (min-aspect-ratio: 1/1) {
+    #game-div {
+        height: 85%;
+    }
 }
