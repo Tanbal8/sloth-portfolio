@@ -39,11 +39,19 @@ body {
 @media (max-aspect-ratio: 1/1) {
     #game-div {
         width: 70%;
+        border-radius: clamp(4px, 2vh, 10px);
+    }
+    #game-div > div, .animation-div {
+        border-radius: clamp(3px, 1vh, 6px);
     }
 }
 @media (min-aspect-ratio: 1/1) {
     #game-div {
         height: 70%;
+        border-radius: clamp(4px, 2vw, 10px);
+    }
+    #game-div > div, .animation-div {
+        border-radius: clamp(3px, 1vw, 6px);
     }
 }
 @media (max-width: 1024px) {

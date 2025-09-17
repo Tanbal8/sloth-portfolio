@@ -48,7 +48,6 @@ body {
     grid-template-rows: auto auto auto;
     gap: 3px;
     background-color: #b9b9b9;
-    border-radius: 8px;
     position: relative;
 }
 #game-div > div {
@@ -387,7 +386,6 @@ body {
 @media only screen and (max-width: 1025px) {
     #score-panel {
         padding: 8px 35px;
-        border-radius: 0 0 10px 10px;
         font-size: 2rem;
     }
     #score-panel > div:not(:last-child) {
@@ -463,9 +461,6 @@ body {
     }
 }
 @media only screen and (max-width: 768px) {
-    #game-div {
-        border-radius: 7px;
-    }
     .x::after, .o::after {
         filter: drop-shadow(3px 3px 4px #373737);
     }
@@ -550,7 +545,6 @@ body {
 @media only screen and (max-width: 600px) {
     #game-div {
         gap: 2px;
-        border-radius: 8px;
     }
     #game-div > div {
         box-shadow: 4px 4px 5px #242424 inset;
@@ -617,7 +611,7 @@ body {
         border-radius: 12px 0 0 12px;
     }
     #x-information, #o-information {
-        width: 35%;
+        width: 38%;
         padding: 0 10px;
     }
     #x-information {
@@ -627,7 +621,7 @@ body {
         border-radius: 6px 0 0 6px;
     }
     #x-information > div:not(#x-chart-div, .information-titr), #o-information > div:not(#o-chart-div, .information-titr) {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
     }
     #x-information > div:not(#x-chart-div) > div:first-child, #o-information > div:not(#o-chart-div) > div:first-child {
         margin-left: 8px;
