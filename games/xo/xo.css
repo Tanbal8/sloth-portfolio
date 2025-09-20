@@ -309,14 +309,14 @@ body {
     display: flex;
     flex-direction: row;
 }
-#x-information > div:not(#x-chart-div, .information-titr), #o-information > div:not(#o-chart-div, .information-titr) {
+#x-information > div:not(#x-chart-div, .information-title), #o-information > div:not(#o-chart-div, .information-title) {
     font-family: aban;
     font-size: 1.5rem;
 }
 #x-information > div:not(#x-chart-div) > div:first-child, #o-information > div:not(#o-chart-div) > div:first-child {
     margin-left: 20px;
 }
-.information-titr {
+.information-title {
     display: flex;
     justify-content: center;
     font-size: 2rem;
@@ -446,13 +446,13 @@ body {
         width: 250px;
         padding: 0 18px;
     }
-    #x-information > div:not(#x-chart-div, .information-titr), #o-information > div:not(#o-chart-div, .information-titr) {
+    #x-information > div:not(#x-chart-div, .information-title), #o-information > div:not(#o-chart-div, .information-title) {
         font-size: 1.3rem;
     }
     #x-information > div:not(#x-chart-div) > div:first-child, #o-information > div:not(#o-chart-div) > div:first-child {
         margin-left: 16px;
     }
-    .information-titr {
+    .information-title {
         font-size: 1.8rem;
         word-spacing: 3px;
     }
@@ -528,13 +528,13 @@ body {
     #o-information {
         border-radius: 8px 0 0 8px;
     }
-    #x-information > div:not(#x-chart-div, .information-titr), #o-information > div:not(#o-chart-div, .information-titr) {
+    #x-information > div:not(#x-chart-div, .information-title), #o-information > div:not(#o-chart-div, .information-title) {
         font-size: 1rem;
     }
     #x-information > div:not(#x-chart-div) > div:first-child, #o-information > div:not(#o-chart-div) > div:first-child {
         margin-left: 12px;
     }
-    .information-titr {
+    .information-title {
         font-size: 1.3rem;
         word-spacing: 2px;
     }
@@ -620,13 +620,13 @@ body {
     #o-information {
         border-radius: 6px 0 0 6px;
     }
-    #x-information > div:not(#x-chart-div, .information-titr), #o-information > div:not(#o-chart-div, .information-titr) {
+    #x-information > div:not(#x-chart-div, .information-title), #o-information > div:not(#o-chart-div, .information-title) {
         font-size: 0.7rem;
     }
     #x-information > div:not(#x-chart-div) > div:first-child, #o-information > div:not(#o-chart-div) > div:first-child {
         margin-left: 8px;
     }
-    .information-titr {
+    .information-title {
         font-size: 1.2rem;
     }
     #o-chart, #x-chart {

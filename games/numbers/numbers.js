@@ -1,4 +1,4 @@
-import Chronometer from "../../library/chronometer/chronometer.js";
+import Timer from "../../library/timer/timer.js";
 class Cell {
     constructor(x, y, value, div, status = 0    ) {
         this.x = x;
@@ -17,7 +17,7 @@ var Game = {
     target_panel: document.getElementById('target-panel'),
     target: 1,
     last_target: null,
-    chronometer: new Chronometer(document.getElementById('timer-minute'), document.getElementById('timer-second')),
+    timer: new Timer(document.getElementById('timer-minute'), document.getElementById('timer-second')),
     Start(size = this.size ?? this.default_size) {
         this.check = true;
         this.size = size;
@@ -27,7 +27,7 @@ var Game = {
             }));
         }
         this.data = Array.from({length: size}, () => Array(size));
-        this.chronometer.Reset();
+        this.timer.Reset();
         this.target = 1;
         this.last_target = (size ** 2) * 2;
         this.target_panel.textContent = 1;
@@ -52,9 +52,9 @@ var Game = {
     },
     End() {
         this.check = false;
-        this.chronometer.Stop();
+        this.timer.Stop();
         Remove_onclick();
-        alert('Good Job!\n' + this.chronometer.To_string());
+        alert('Good Job!\n' + this.timer.To_string());
         this.Start();
     },
     End_Check() {
@@ -79,7 +79,7 @@ function Click(e) {
     let [x, y] = [div.getAttribute('x'), div.getAttribute('y')];
     let cell = Game.data[y][x];
     if (cell.status < 2 && cell.value[cell.status] == Game.target) {
-        if (!Game.chronometer.check) Game.chronometer.Start();
+        if (!Game.timer.check) Game.timer.Start();
         cell.status++;
         if (cell.status < 2) { // Next Number
             cell.div.textContent = cell.value[cell.status];
