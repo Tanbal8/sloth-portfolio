@@ -1,4 +1,4 @@
-class Chronometer {
+class Timer {
     constructor(minute_div, second_div) {
         this.minute_div = minute_div;
         this.second_div = second_div;
@@ -32,4 +32,4 @@ class Chronometer {
         return this.minute.toString().padStart(2, '0') + " : " + this.second.toString().padStart(2, '0');
     }
 }
-export default Chronometer;
+export default Timer;

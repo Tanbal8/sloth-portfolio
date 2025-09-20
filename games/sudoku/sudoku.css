@@ -1,8 +1,4 @@
 @font-face {
-    font-family: sahel;
-    src: url(../../fonts/persian/Sahel-Bold.ttf);
-}
-@font-face {
     font-family: consola;
     src: url(../../fonts/english/CONSOLA.TTF);
 }
@@ -10,110 +6,96 @@
     outline: none;
     -webkit-tap-highlight-color: transparent;
 }
+:root {
+    --block-border-size: 2.5px;
+    --cell-border-size: 0.5px;
+    --font-size: 1.8rem;
+}
 body {
     user-select: none;
+    margin: 0;
+}
+#game-page, #level-page {
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    padding: 0;
+    position: relative;
 }
-.kol {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.game {
-    width: 540px;
-    height: 540px;
-    border: 5px solid rgb(0, 0, 180);
-    border-radius: 5px 5px 0 0;
+#game-div {
+    border-width: calc(2 * var(--block-border-size));
+    border-style: solid;
+    border-COLOR: rgb(0, 0, 180);
+    border-radius: 8px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-.game > div {
-    width: 100%;
-    height: 265px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.game > div:nth-child(2) {
-    border-top: 5px solid rgb(0, 0, 180);
-    border-bottom: 5px solid rgb(0, 0, 180);
-}
-.game > div > div {
-    width: 100%;
-    height: 33.33%;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+}
+#board {
+    width: 70vmin;
+    aspect-ratio: 1;
+    display: grid;
+}
+#board > div {
+    width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
 } 
-.game > div > div:nth-child(2) {
-    border-top: 2px solid rgb(0, 0, 180);
-    border-bottom: 2px solid rgb(0, 0, 180);
-}
-.game > div > div > div {
-    width: 33%;
-    height: 100%;
-    display: flex;
-    justify-content: row;
-    justify-content: space-between;
-}
-.game > div > div > div:nth-child(2) {
-    border-right: 5px solid rgb(0, 0, 180);
-    border-left: 5px solid rgb(0, 0, 180);
-}
-.game > div > div > div > div {
-    width: 33%;
+#board > div > div {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font: 30px arial;
+    border: var(--cell-border-size) solid rgb(0, 0, 180);
     background-color: rgb(210, 255, 255);
+    font-size: var(--font-size);
+    font-family: Arial, Helvetica, sans-serif;
     color: blue;
     text-shadow: 1.5px 1.5px 2px rgb(0, 150, 255);
     cursor: pointer;
 }
-.game > div > div > div > div:nth-child(2) {
-    border-right: 2px solid rgb(0, 0, 180);
-    border-left: 2px solid rgb(0, 0, 180);
+#board > div:nth-child(3n) {
+    border-bottom: var(--block-border-size) solid rgb(0, 0, 180);
 }
-.numbers {
-    width: 550px;
-    height: 72px;
+#board > div:nth-child(3n + 1) {
+    border-top: var(--block-border-size) solid rgb(0, 0, 180);
+}
+#board > div > div:nth-child(-3n + 6) {
+    border-right: var(--block-border-size) solid rgb(0, 0, 180);
+}
+#board > div > div:nth-child(-3n + 7) {
+    border-left: var(--block-border-size) solid rgb(0, 0, 180);
+}
+#number-panel {
+    width: 100%;
     background-color: rgb(0, 0, 180);
-    border-radius: 0 0 5px 5px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    justify-content: space-around;
     align-items: center;
-    margin-top: -2px;
+    padding: 1% 0.5% calc(1% - var(--block-border-size));
+    box-sizing: border-box;
 }
-.numbers > div {
-    width: 48px;
-    height: 48px;
+#number-panel > div {
+    aspect-ratio: 1;
     background-color: azure;
     display: flex;
     justify-content: center;
     align-items: center;
-    font: 28px arial;
+    font-size: var(--font-size);
+    font-family: arial;
     border-radius: 5px;
     cursor: pointer;
+    margin: 0 5%;
 }
-.numbers-on {
-    background-color: rgb(100, 255, 255) !important;
-    color: rgb(0, 0, 180) !important;
-    text-shadow: 1px 1px 3px rgb(0, 80, 255);
-}
-.level {
+#level-panel {
     width: 400px;
-    height: 480px;
+    aspect-ratio: 3 / 4;
+    max-height: 80%;
     background-color: rgb(0, 255, 255);
     border-radius: 15px;
     display: flex;
@@ -121,46 +103,66 @@ body {
     justify-content: space-evenly;
     align-items: center;
 }
-.level-text {
-    height: 20%;
-    font: 38px sahel;
+#level-titr {
+    font-size: 2.3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
 }
-.level-btn {
-    height: 60%;
+#level-list {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-.level-btn > button {
-    width: 95px;
-    height: 55px;
-    font: 22px sahel;
+#level-list > button {
+    width: 150px;
+    aspect-ratio: 2;
+    font-size: 1.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
     cursor: pointer;
     background-color: transparent;
-    border: 3px solid rgb(0, 0, 180);
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgb(0, 0, 180);
     border-radius: 10px;
     color: rgb(0, 0, 180);
     transition: 0.1s linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-shadow: 0 1px 3px rgb(0, 150, 255), 0 0 4px rgb(0, 81, 255);
 }
-.level-btn > button:active {
+#level-list > button:not(:last-child) {
+    margin-bottom: 30px;
+}
+#level-list > button:active {
     background-color: rgb(0, 0, 180);
     color: rgb(0, 255, 255);
     text-shadow: none;
 }
-.unchangeable {
+.fixed {
     color: rgb(0, 0, 140) !important;
     text-shadow: 1px 1px 3px rgb(0, 65, 255) !important;
+    cursor: default !important;
 }
-.active {
+.active-cell {
     background-color: aquamarine !important;
-}
+} 
 .wrong {
-    text-shadow: -2px 0 1px red, -1.4px 1.4px 1px red, 0 2px 1px red, 1.4px 1.4px 1px red, 2px 0 1px red , 1.4px -1.4px 1px red, 0 -2px 1px red, -1.4px -1.4px 1px red !important;
+    -webkit-text-stroke: 1px red;
+    font-weight: 600;
 }
-.timer-div {
-    width: 12vw;
-    height: 80px;
+.completed-number {
+    background-color: rgb(0, 150, 255) !important;
+}
+.active-number {
+    background-color: rgb(100, 255, 255) !important;
+    color: rgb(0, 0, 180) !important;
+    text-shadow: 1px 1px 3px rgb(0, 80, 255);
+}
+#timer-panel {
+    width: 150px;
+    aspect-ratio: 2.5;
     background-color: rgb(0, 255, 255);
     color: rgb(0, 0, 180);
     text-shadow: 0 0 3px rgb(0, 65, 255);
@@ -168,80 +170,123 @@ body {
     top: 0;
     right: 0;
     border-radius: 5px;
+    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
     box-sizing: border-box;
     padding: 0 10px;
-    font: 30px consola;
-    border: 3px solid rgb(0, 65, 255);
+    font-size: 1.8rem;
+    font-family: consola;
+    border: 3px;
+    border-style: solid;
+    border-color: rgb(0, 65, 255);
     box-shadow: 0 0 4px rgb(119, 198, 255);
 }
-
-.gn {
-    display: flex;
-    flex-direction: column;
+@media only screen and (max-width: 1025px) {
+    :root {
+        --block-border-size: 2px;
+        --cell-border-size: 0.5px;
+        --font-size: 1.5rem;
+    }
+    #game-div {
+        border-radius: 7px;
+    }
+    #number-panel > div {
+        border-radius: 5px;
+    }
+    #level-panel {
+        width: 350px;
+        border-radius: 13px;
+    }
+    #level-titr {
+        font-size: 2rem;
+    }
+    #level-list > button {
+        width: 120px;
+        font-size: 1.3rem;
+        border-width: 3px;
+        border-radius: 10px;
+    }
+    #level-list > button:not(:last-child) {
+        margin-bottom: 25px;
+    }
+    #timer-panel {
+        width: 140px;
+        border-radius: 5px;
+        padding: 0 8px;
+        font-size: 1.6rem;
+    }
 }
 @media only screen and (max-width: 768px) {
-    .game {
-        width: 435px;
-        height: 435px;
+    :root {
+        --block-border-size: 1.8px;
+        --cell-border-size: 0.3px;
+        --font-size: 1.2rem;
     }
-    .game > div > div > div > div {
-        font: 25px arial;
+    #game-div {
+        border-radius: 7px;
     }
-    .numbers {
-        width: 445px;
-        height: 57px;
-        margin-top: -2px;
+    #board > div > div {
+        text-shadow: 1px 1px 1px rgb(0, 150, 255);
     }
-    .numbers > div {
-        width: 38px;
-        height: 38px;
-        font: 25px arial;
+    #number-panel > div {
+        border-radius: 4px;
     }
-    .level {
-        width: 320px;
-        height: 380px;
+    #level-panel {
+        width: clamp(150px, 40vw, 300px);
+        border-radius: 10px;
     }
-    .level-text {
-        font: 33px sahel;
+    #level-titr {
+        font-size: 1.8rem;
     }
-    .level-btn > button {
-        width: 85px;
-        height: 50px;
-        font: 20px sahel;
+    #level-list > button {
+        width: 90px;
+        font-size: 1rem;
+        border-radius: 10px;
+    }
+    #level-list > button:not(:last-child) {
+        margin-bottom: 18px;
+    }
+    .fixed {
+        text-shadow: 1px 1px 1px rgb(0, 65, 255) !important;
+    }
+    #timer-panel {
+        width: 120px;
+        border-radius: 4px;
+        padding: 0 7px;
+        font-size: 1.4rem;
     }
 }
-@media only screen and (max-width: 600px) {
-    .game {
-        width: 360px;
-        height: 360px;
+@media only screen and (max-width: 481px) {
+    :root {
+        --block-border-size: 1.6px;
+        --font-size: 0.8rem;
     }
-    .game > div > div > div > div {
-        font: 20px arial;
-        text-shadow: 1px 1px 2px rgb(0, 150, 255);
+    #game-div {
+        border-radius: 5px;
     }
-    .numbers {
-        width: 370px;
-        height: 43px;
-        margin-top: -4px;
+    #number-panel > div {
+        border-radius: 3px;
     }
-    .numbers > div {
-        width: 29px;
-        height: 29px;
-        font: 20px arial;
+    #level-panel {
+        border-radius: 8px;
     }
-    .level {
-        width: 280px;
-        height: 320px;
+    #level-titr {
+        font-size: 1.4rem;
     }
-    .level-text {
-        font: 30px sahel;
+    #level-list > button {
+        width: 60px;
+        font-size: 0.8rem;
+        border-width: 2px;
+        border-radius: 6px;
     }
-    .level-btn > button {
-        width: 75px;
-        height: 45px;
-        font: 19px sahel;
+    #level-list > button:not(:last-child) {
+        margin-bottom: 10px;
+    }
+    #timer-panel {
+        width: 80px;
+        padding: 0 6px;
+        font-size: 1rem;
     }
 }

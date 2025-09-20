@@ -1,4 +1,4 @@
-import Chronometer from '../../library/chronometer/chronometer.js';
+import Timer from '../../library/timer/timer.js';
 class Cell {
     constructor(x, y, div, type = 'number', value = 0) {
         this.x = x;
@@ -17,19 +17,19 @@ var Game = {
         row: 4,
         column: 4
     },
-    chronometer: new Chronometer(document.getElementById('chronometer-minute'), document.getElementById('chronometer-second')),
+    timer: new Timer(document.getElementById('timer-minute'), document.getElementById('timer-second')),
     div: document.getElementById('game-div'),
     data: [],
     Start(size = this.default_size) {
         this.check = true;
         this.delay_check = false;
         this.size = size;
-        Game.chronometer.Reset();
+        Game.timer.Reset();
         for (let row of this.data)
             for (let cell of row)
                 cell.div.remove();
         this.data = Array.from({length: size.row}, () => Array(size.column));
-        let values = this.Create_Table();
+        let values = this.Create_Board();
         for (let y = 0 ; y < size.row ; y++)
             for (let x = 0 ; x < size.column ; x++) {
                 let cell = document.createElement('div');
@@ -44,7 +44,7 @@ var Game = {
     },
     End() {
         this.check = false;
-        alert(Game.chronometer.To_string());
+        alert(Game.timer.To_string());
         Game.Start();
     },
     End_Check() {
@@ -55,7 +55,7 @@ var Game = {
                     if (this.data[y][x].value != y * this.size.column + x + 1) return false;
         return true;
     },
-    Create_Table() {
+    Create_Board() {
         let values_1d = Array.from({length: this.size.row * this.size.column}, (_, index) => index), values_2d = [];
         for (let a = values_1d.length - 1 ; a >= 0 ; a--) {
             let b = Math.floor(Math.random() * (a + 1));
@@ -95,7 +95,7 @@ function Translate(start, target) {
 async function Move(x, y) {
     const select = Game.data[y][x];
     if (select.type == 'number' && Game.check && !Game.delay_check) {
-        if (!Game.chronometer.check) Game.chronometer.Start();
+        if (!Game.timer.check) Game.timer.Start();
         let empty, check = false;
         let animations = [];
         for (let x = select.x - 1 ; x >= 0 ; x--) {
