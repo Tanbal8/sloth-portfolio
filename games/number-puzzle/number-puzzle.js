@@ -1,4 +1,4 @@
-import Timer from '../../library/timer/timer.js';
+import Timer from '../../libraries/timer/timer.js';
 class Cell {
     constructor(x, y, div, type = 'number', value = 0) {
         this.x = x;
