@@ -1,4 +1,4 @@
-import Timer from '../../library/timer/timer.js';
+import Timer from '../../libraries/timer/timer.js';
 class Cell {
     constructor(x, y, block, div, type, value) {
         this.x = x;
@@ -105,6 +105,7 @@ const Game = {
             let div = this.div.children[y].children[x];
             this.data[y][x] = new Cell(x, y, block, div, 'empty', 0);
         }));
+        this.timer.Reset();
         this.timer.Start();
         this.Clear_Divs();
         this.number_panel.Clear();
@@ -155,7 +156,7 @@ const Game = {
     Clear_Divs() {
         this.data.forEach(row => row.forEach(cell => {
             cell.div.textContent = '';
-            cell.div.classList.remove('fixed', 'wrong', 'active-cells');
+            cell.div.classList.remove('fixed', 'wrong', 'active-cell');
         }))
     },
     Show_Board() {
