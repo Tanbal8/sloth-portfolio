@@ -1,0 +1,55 @@
+:root {
+    --border-radius: 1rem;
+}
+body {
+    margin: 0;
+}
+button {
+    outline: none;
+    border: none;
+}
+#game-list {
+    margin: 0 auto;
+    width: 90vw;
+    padding: 10px;
+    box-sizing: border-box;
+}
+#game-list > .row > div > div {
+    aspect-ratio: 5 / 3;
+    background-color: #ccc;
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    animation: show_buttons 0.5s ease forwards;
+}
+@keyframes show_buttons {
+    0% { transform: scale(0); }
+    60% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+.name-container {
+    position: absolute;
+    top: 3px;
+    left: 8px;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+.play-button, .how-to-play-button {
+    position: absolute;
+    background-color: #aaa;
+    border: 1px solid #888;
+    transition: background-color 0.12s linear;
+    opacity: 0.8;
+}
+.play-button {
+    inset: 60% 0 0 50%;
+    border-radius: 0 0 var(--border-radius) 0;
+}
+.how-to-play-button {
+    inset: 60% 50% 0 0;
+    border-radius: 0 0 0 var(--border-radius);
+}
+.play-button:not(:disabled):hover, .how-to-play-button:not(:disabled):hover {
+    background-color: #888;
+}
