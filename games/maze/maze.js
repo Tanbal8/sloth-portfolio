@@ -101,6 +101,7 @@ document.addEventListener('touchstart', e => {
     start_x = touch.clientX;
     start_y = touch.clientY;
 });
+document.addEventListener('touchmove', e => { e.preventDefault() }, { passive: false });
 document.addEventListener('touchend', e => {
     const touch = e.changedTouches[0];
     const dx = touch.clientX - start_x;
