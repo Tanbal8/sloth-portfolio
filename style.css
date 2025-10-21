@@ -1,5 +1,6 @@
 :root {
     --border-radius: 1rem;
+    --button-height: 35%;
 }
 body {
     margin: 0;
@@ -17,6 +18,9 @@ button {
 #game-list > .row > div > div {
     aspect-ratio: 5 / 3;
     background-color: #ccc;
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
     position: relative;
     border-radius: var(--border-radius);
     overflow: hidden;
@@ -43,11 +47,11 @@ button {
     opacity: 0.8;
 }
 .play-button {
-    inset: 60% 0 0 50%;
+    inset: calc(100% - var(--button-height)) 0 0 50%;
     border-radius: 0 0 var(--border-radius) 0;
 }
 .how-to-play-button {
-    inset: 60% 50% 0 0;
+    inset: calc(100% - var(--button-height)) 50% 0 0;
     border-radius: 0 0 0 var(--border-radius);
 }
 .play-button:not(:disabled):hover, .how-to-play-button:not(:disabled):hover {

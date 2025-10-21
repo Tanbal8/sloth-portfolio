@@ -1,3 +1,4 @@
+const Image_directory_path = './images/';
 const Project = {
     Games: {
         directory_path: './games/',
@@ -5,22 +6,10 @@ const Project = {
         list: {
             '2048': {
                 path: '2048/2048.html',
-                poster: '',
+                poster: Image_directory_path + '2048/2048-icon.png',
             },
             'maze': {
                 path: 'maze/maze.html',
-                poster: '',
-            },
-            'xo': {
-                path: 'xo/xo.html',
-                poster: '',
-            },
-            'number puzzle': {
-                path: 'number-puzzle/number-puzzle.html',
-                poster: '',
-            },
-            'numbers': {
-                path: 'numbers/numbers.html',
                 poster: '',
             },
             'chess': {
@@ -29,6 +18,18 @@ const Project = {
             },
             'sudoku': {
                 path: 'sudoku/sudoku.html',
+                poster: '',
+            },
+            'number puzzle': {
+                path: 'number-puzzle/number-puzzle.html',
+                poster: '',
+            },
+            'xo': {
+                path: 'xo/xo.html',
+                poster: '',
+            },
+            'numbers': {
+                path: 'numbers/numbers.html',
                 poster: '',
             },
         }
@@ -51,6 +52,9 @@ const Create_Button = (name, object, parent, directory_path) => {
     let name_container = document.createElement('div');
     let play_button = document.createElement('button');
     let how_to_play_button = document.createElement('button');
+    console.log(container, object.poster);
+    
+    container.style.backgroundImage = `url(${object.poster})`;
     name_container.classList.add('name-container');
     name_container.textContent = name;
     play_button.classList.add('play-button');
