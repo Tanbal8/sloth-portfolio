@@ -14,7 +14,7 @@ const Project = {
             },
             'chess': {
                 path: 'chess/chess.html',
-                poster: '',
+                poster: Image_directory_path + 'chess/chess-icon.png',
             },
             'sudoku': {
                 path: 'sudoku/sudoku.html',
