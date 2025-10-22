@@ -32,19 +32,23 @@ var Game = {
     End() {
         this.check = false;
         window.removeEventListener('keydown', Key_Press);
-        alert(`Game Over!\nScore: ${Game.score}`);
-        this.Start();
+        setTimeout(() => {
+            alert(`Game Over!\nScore: ${Game.score}`);
+            // this.Start();
+        }, 200);
     },
     End_Check() {
         if (!this.Has_Empty_Cell()) {
-            data.forEach((row, y) => row.forEach((cell, x) => {
-                if ((y > 0 && this.data[y][x].number == this.data[y - 1][x].number) ||
-                    (y < Game.size.row - 1 && this.data[y][x].number == this.data[y + 1][x].number) ||
-                    (x > 0 && this.data[y][x].number == this.data[y][x - 1].number) ||
-                    (x < Game.size.column - 1 && this.data[y][x].number == this.data[y][x + 1].number)) {
-                    return false;
+            for (let y = 0 ; y < this.size.row ; y++) {
+                for (let x = 0 ; x < this.size.column ; x++) {
+                    if ((y > 0 && this.data[y][x].number == this.data[y - 1][x].number) ||
+                        (y < Game.size.row - 1 && this.data[y][x].number == this.data[y + 1][x].number) ||
+                        (x > 0 && this.data[y][x].number == this.data[y][x - 1].number) ||
+                        (x < Game.size.column - 1 && this.data[y][x].number == this.data[y][x + 1].number)) {
+                        return false;
+                    }
                 }
-            }));
+            }
             return true;
         }
         return false;
@@ -59,9 +63,11 @@ var Game = {
         return this.data.some(row => row.some(cell => cell.type == 'empty'));
     },
     Empty_Cell() {
-        let x = Math.floor(Math.random() * this.size.column);
-        let y = Math.floor(Math.random() * this.size.row);
-        return (this.data[y][x].type == 'empty') ? {x, y} : this.Empty_Cell();
+        let empty_cells = [];
+        this.data.forEach((row, y) => row.forEach((cell, x) => {
+            if (cell.type === 'empty') empty_cells.push({x, y});
+        }));
+        return empty_cells[Math.floor(Math.random() * empty_cells.length)];
     }
 }
 function DIV(position) {

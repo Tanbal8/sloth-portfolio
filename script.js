@@ -52,8 +52,6 @@ const Create_Button = (name, object, parent, directory_path) => {
     let name_container = document.createElement('div');
     let play_button = document.createElement('button');
     let how_to_play_button = document.createElement('button');
-    console.log(container, object.poster);
-    
     container.style.backgroundImage = `url(${object.poster})`;
     name_container.classList.add('name-container');
     name_container.textContent = name;
